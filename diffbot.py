@@ -154,6 +154,8 @@ class Job(Client):
         params = {'token': self._token, 'name': self._name}
         params.update(kwargs)
         res = self._get(self._url, params)
+        if not res.get('jobs'):
+            return None
         job = next(j for j in res['jobs'] if j['name'] == self._name)
         return job
 
